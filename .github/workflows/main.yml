@@ -170,6 +170,10 @@ jobs:
         # которые нужно выполнить на сервере, 
         # с которым установлено соединение
         script: |
+          echo ${{ secrets.HOST }}
+          echo ${{ secrets.USER }}
+          echo ${{ secrets.SSH_PASSPHRASE }}
+          echo ${{ secrets.SSH_KEY }}
           cd taski
           # Выполняет pull образов с Docker Hub
           sudo docker compose -f docker-compose.production.yml pull
