@@ -156,7 +156,7 @@ jobs:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USER }}
         key: ${{ secrets.SSH_KEY }}
-        passphrase: ${{ secrets.SSH_PASSPHRASE }}
+        password: ${{ secrets.SSH_PASSPHRASE }}
         source: "docker-compose.production.yml"
         target: "taski-docker"
     - name: Executing remote ssh commands to deploy
@@ -165,11 +165,15 @@ jobs:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USER }}
         key: ${{ secrets.SSH_KEY }}
-        passphrase: ${{ secrets.SSH_PASSPHRASE }}
+        password: ${{ secrets.SSH_PASSPHRASE }}
         # Параметр script передаёт в action appleboy/ssh-action команды,
         # которые нужно выполнить на сервере, 
         # с которым установлено соединение
         script: |
+          echo ${{ secrets.HOST }}
+          echo ${{ secrets.USER }}
+          echo ${{ secrets.SSH_PASSPHRASE }}
+          echo ${{ secrets.SSH_KEY }}
           cd taski
           # Выполняет pull образов с Docker Hub
           sudo docker compose -f docker-compose.production.yml pull
